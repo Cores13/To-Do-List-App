@@ -4,7 +4,9 @@
   "description": "Todos app using html, css and javascript(node.js + express)",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.3"
   },
   "devDependencies": {},
   "scripts": {
