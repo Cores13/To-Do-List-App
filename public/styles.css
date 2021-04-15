@@ -2,21 +2,17 @@
   background-color: #f5f5f5;
 }
 .container {
-  flex: display;
+  display: flex;
   width: 65%;
   flex-direction: column;
-  justify-content: center;
   margin: 0 auto;
-  background-color: white;
 }
-.todos-title {
-  background-color: #f5f5f5;
-}
+
 .header {
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: baseline;
-  flex: display;
+  justify-content: flex-start;
+  display: flex;
 }
 .todos-title {
   font-family: Arial;
@@ -28,21 +24,30 @@
   -webkit-text-rendering: optimizeLegibility;
   -moz-text-rendering: optimizeLegibility;
   text-rendering: optimizeLegibility;
+  background-color: #f5f5f5;
 }
 .textfield {
-  flex: display;
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: white;
 }
 .textfield img {
-  width: 5%;
+  margin-top: 10px;
+  margin-left: 5px;
+  width: 10px;
+  height: 10px;
 }
-.new-todo,
+.todo-list {
+  background-color: white;
+}
+.form-control,
 .edit {
   /* position: relative; */
   /* margin: 0; */
-  width: fit-content;
+  width: 95%;
   font-size: 24px;
   /* font-family: inherit; */
   font-weight: inherit;
@@ -55,15 +60,18 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.footer {
-  flex: display;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  flex-direction: row;
-}
+
 .filters {
-  flex: display;
-  flex-direction: row;
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  flex-direction: row;
+  background-color: white;
+}
+.tasks,
+.footer {
+  background-color: white;
+}
+.destroy img {
+  width: 10px;
 }

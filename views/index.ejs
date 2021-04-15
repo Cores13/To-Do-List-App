@@ -6,39 +6,34 @@
         <title>Todo MVC</title>
     </head>
     <body>
+        
         <div class="container1">
-        <div class="container">
-            <div class="header">
-                <h1 class="todos-title">todos</h1>
-                <div class="textfield">
-                    <img src="arrow.png" alt="Toggle all">
-                    <input class="new-todo" placeholder="What needs to be done?" autofocus></input>
-                </div>
-            </div>
+            <div class="container">
+            <%- include('./head')%>
 
+            
             <div class="todo-list">
 
                 <ul>
-                    <li data-id="" class>
+                    <% todo.forEach(todos =>{ %>
+                        <li>
                         <div>
+                            
                             <input class="toggle" type="checkbox">
-                            <label>sdfhdh</label>
-                            <button class="destroy">
-                                <img src="" alt="">
-                            </button>
+                            <label><%= todos.todo%></label>
+                            <a href="/delete-todo/<%=todos._id%>" class="destroy">
+                                <img src="x.png" alt="X">
+                            </a>    
                         </div>
                     </li>
+                    <% });%>
+                    
+                    
                 </ul>
-
-
+    
             </div>
-            <div class="footer">
-                <ul class="filters">
-                    <li><a href="/">All</a></li>
-                    <li><a href="/active">Active</a></li>
-                    <li><a href="/completed">Completed</a></li>
-                </ul>
-            </div>
+
+            <%- include('./footer')%>
         </div>
         </div>
         <script src="../app.js"></script>

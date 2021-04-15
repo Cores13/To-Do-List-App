@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const Todo = require('./models/todo.js');
 const todoRoutes =require('./routes/todoRoutes.js');
 // const Todo =require('./models/todo.js');
 
@@ -18,59 +19,6 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'));
 
 
-// //Save a todo
-// app.get('/new-todo', (req, res)=>{
-//     const todo = new Todo({
-//         task: 'asfi',
-//     });
-//     todo.save()
-//         .then((result) =>{
-//             res.send(result);
-//             console.log('sent');
-//         })
-//         .catch((err) =>{
-//             console.log(err)
-//         });
-// });
-
-// // Get all todos
-// app.get('/all-todos', (req, res)=>{
-//     Todo.find()
-//         .then((result)=>{
-//             res.send(result);
-//         })
-//         .catch((err)=>{
-//             console.log(err)
-//         });
-// });
-
-// //Get active
-// app.get('/active', (req, res)=>{
-//     Todo.find().sort({completed: false})
-//     .then(()=>{
-//         res.send(result)
-//     })
-//     .catch((err)=>{
-//         console.log(err)
-//     });
-// })
-
-// todo routes
-
-
-// listening for requests
-app.get('/', (req, res)=>{
-    res.render('index');
-    // res.sendFile('./views/index.html', {root: __dirname});
-});
-app.get('/active', (req, res)=>{
-    res.render('active');
-    // res.sendFile('./views/active.html', {root: __dirname});
-});
-app.get('/completed', (req, res)=>{
-    res.render('completed')
-    // res.sendFile('./views/completed.html', {root: __dirname});
-});
 
 app.use(todoRoutes);
 //404 page

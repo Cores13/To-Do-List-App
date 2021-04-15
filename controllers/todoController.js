@@ -2,7 +2,6 @@
 const todo_index = (req,res) =>{
     app.get('/new-todo', (req, res)=>{
             const todo = new Todo({
-                task: 'asfi',
             });
             todo.save()
                 .then((result) =>{
@@ -14,5 +13,3 @@ const todo_index = (req,res) =>{
                 });
         });
 }
-
-const todo_create_get
