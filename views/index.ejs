@@ -2,40 +2,58 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/styles.css">
+        <link rel="stylesheet" href="styles.css">
         <title>Todo MVC</title>
     </head>
     <body>
         
         <div class="container1">
             <div class="container">
-            <%- include('./head')%>
+            <div class="header">
+                <h1 class="todos-title">todos</h1>
+                <div class="textfield">
+        
+                    <form action="/new-todo" method="POST" class="d-flex">
+                        <img src="arrow.jpg" alt="Toggle all">
+                        <input type="text" name="todo" class="form-control" placeholder="What needs to be done?" autofocus></input>
+                        <input type="submit" value="Add Todo" class="submit-button">
+                    </form>
+        
+                    
+                </div>
+                
+            </div>
 
-            
-            <div class="todo-list">
 
-                <ul>
+            <div id="list" class="todo-list">
+
+                <ul class='ull'>
                     <% todo.forEach(todos =>{ %>
                         <li>
                         <div>
-                            
-                            <input class="toggle" type="checkbox">
-                            <label><%= todos.todo%></label>
+                             
+                            <input class="toggle" name="check" type="checkbox" action="/completed/<%=todos._id%>" method="POST">
+                            <label id="<%=todos._id%>"><%= todos.todo%></label>
                             <a href="/delete-todo/<%=todos._id%>" class="destroy">
                                 <img src="x.png" alt="X">
                             </a>    
                         </div>
-                    </li>
-                    <% });%>
-                    
-                    
+                    </li>                  
+                    <%})%>
                 </ul>
     
             </div>
-
-            <%- include('./footer')%>
+            <div class="footer">
+                <ul class="filters">
+                    <li><a href="/">All</a></li>
+                    <li><a href="/active">Active</a></li>
+                    <li><a href="/completed/">Completed</a></li>
+                </ul>
+            </div>
         </div>
         </div>
-        <script src="../app.js"></script>
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="script.js"></script>
     </body>
 </html>
