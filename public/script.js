@@ -1,6 +1,6 @@
-$(document.readyState(async function())){
-    const todos = await $.getJSON('/')
-}
+$(document.readyState(async function(){
+    const todos = await $.getJSON('/');
+}));
 
 function showTodos(todos){
     for(let item of todos){
