@@ -32,7 +32,7 @@
                     <% todo.forEach(todos =>{ %>
                         <li>
                         <div id="d:<%=todos._id%>">
-                            <form class="one-todo" action="/active/check/<%=todos._id%>" method="POST">
+                            <form class="one-todo" action="/check/<%=todos._id%>" method="POST">
                                 <input id="<%=todos._id%>"class="toggle" name="completed" onChange="this.form.submit()" type="checkbox" <% if(todos.completed == true){%> checked<%}%> data-check-complete>
                                 <label id="<%=todos._id%>"><%= todos.todo%></label>
                                 <a href="/delete-todo/<%=todos._id%>" class="destroy">
@@ -48,8 +48,8 @@
             <div class="footer">
                 <ul class="filters">
                     <li><a href="/">All</a></li>
-                    <li><a href="/active">Active</a></li>
-                    <li><a href="/completed">Completed</a></li>
+                    <li><a href="/active/">Active</a></li>
+                    <li><a href="/completed/">Completed</a></li>
                 </ul>
             </div>
             <% }%>

@@ -34,7 +34,7 @@ router.get('/delete-todo/:_id', (req, res)=>{
     });
 });
 
-router.post('/active/check/:_id', async (req, res)=>{
+router.post('/check/:_id', async (req, res)=>{
     const todo = await Todo.findById(req.params._id);
 
     if(req.body.completed == 'on'){
@@ -49,12 +49,12 @@ router.post('/active/check/:_id', async (req, res)=>{
     res.redirect('/');
 });
 
-router.get('/active', async(req, res)=>{
+router.get('/active/', async(req, res)=>{
 
     const activeTodo = await Todo.find({completed: false});
     res.render('index', {todo: activeTodo });
 });
-router.get('/completed', async(req, res)=>{
+router.get('/completed/', async(req, res)=>{
     const completedTodo = await Todo.find({completed: true});
     res.render('index', {todo: completedTodo });
 });
