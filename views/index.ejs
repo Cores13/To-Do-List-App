@@ -16,7 +16,7 @@
                     <form action="/new-todo" method="POST" class="d-flex">
                         <img src="arrow.jpg" alt="Toggle all">
                         <input type="text" name="todo" class="form-control" placeholder="What needs to be done?" autofocus></input>
-                        <input type="submit" value="Add Todo" class="submit-button">
+                        <input type="submit" value="Add Todo" class="submit-button" hidden>
                     </form>
         
                     
@@ -25,18 +25,20 @@
             </div>
 
 
+            <%if(todo.length > 0){%>
             <div id="list" class="todo-list">
 
-                <ul class='ull'>
+                <ul>
                     <% todo.forEach(todos =>{ %>
                         <li>
-                        <div>
-                             
-                            <input class="toggle" name="check" type="checkbox" action="/completed/<%=todos._id%>" method="POST">
-                            <label id="<%=todos._id%>"><%= todos.todo%></label>
-                            <a href="/delete-todo/<%=todos._id%>" class="destroy">
-                                <img src="x.png" alt="X">
-                            </a>    
+                        <div id="d:<%=todos._id%>">
+                            <form class="one-todo" action="/active/check/<%=todos._id%>" method="POST">
+                                <input id="<%=todos._id%>"class="toggle" name="completed" onChange="this.form.submit()" type="checkbox" <% if(todos.completed == true){%> checked<%}%> data-check-complete>
+                                <label id="<%=todos._id%>"><%= todos.todo%></label>
+                                <a href="/delete-todo/<%=todos._id%>" class="destroy">
+                                    <img src="x.png" alt="X">
+                                </a>
+                            </form>    
                         </div>
                     </li>                  
                     <%})%>
@@ -47,13 +49,12 @@
                 <ul class="filters">
                     <li><a href="/">All</a></li>
                     <li><a href="/active">Active</a></li>
-                    <li><a href="/completed/">Completed</a></li>
+                    <li><a href="/completed">Completed</a></li>
                 </ul>
             </div>
+            <% }%>
         </div>
         </div>
-        
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="script.js"></script>
+
     </body>
 </html>

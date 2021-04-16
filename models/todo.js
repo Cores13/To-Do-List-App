@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { stringify } = require('qs');
+// const { stringify } = require('qs');
 
 const todoSchema = new mongoose.Schema({
     todo: {
