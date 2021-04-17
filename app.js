@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Todo = require('./models/todo.js');
 const todoRoutes =require('./routes/todoRoutes.js');
+const activeRoutes =require('./routes/activeRoutes.js');
+const completedRoutes =require('./routes/completedRoutes.js');
 
 //express app
 const app = express();
@@ -17,14 +19,12 @@ mongoose.connect(dbURL, {useNewUrlParser: true, useUnifiedTopology: true})
 app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'));
 
+var fullUrl = app.path;
+console.log(fullUrl);
 
-
-// checkedBt.addEventListener('click', e=>{
-//     e.preventDefault();
-//     todo.completed
-// });
-
-app.use(todoRoutes);
+app.use('/',todoRoutes);
+app.use('/active', activeRoutes);
+app.use('/completed', completedRoutes);
 //404 page
 app.use((req, res)=>{
     res.status(404).sendFile('./views/404.html', {root: __dirname});
