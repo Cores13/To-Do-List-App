@@ -9,7 +9,10 @@ const router = express.Router();
 router.get('/', async (req, res)=>{
     const url = '';
     const allTodo = await Todo.find();
-    res.render('index', {todo: allTodo, url: url});
+    const activeTodo = await Todo.find({completed: false});
+    var count = activeTodo.length;
+    all = allTodo.length;
+    res.render('index', {todo: allTodo, url: url, count: count});
 });
 
 router.post('/new-todo', (req, res)=>{
@@ -48,6 +51,16 @@ router.post('/check/:_id', async (req, res)=>{
         });
     }
     res.redirect('/');
+});
+
+router.get('/clear-completed', async (req, res)=>{
+    Todo.deleteMany({completed : true})
+    .then(()=>{
+        res.redirect("/");
+    })
+    .catch((err)=>{
+        console.log(err);
+    });
 });
 
 // router.get('/active', async(req, res)=>{

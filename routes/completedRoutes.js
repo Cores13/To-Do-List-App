@@ -9,7 +9,11 @@ const router = express.Router();
 router.get('/', async(req, res)=>{
     const url = '/completed';
     const completedTodo = await Todo.find({completed: true});
-    res.render('index', {todo: completedTodo, url: url });
+    const activeTodo = await Todo.find({completed: false});
+    var count = activeTodo.length;
+    const allTodo = await Todo.find();
+    all = allTodo.length;
+    res.render('index', {todo: completedTodo, url: url, count: count, all: all});
 });
 
 router.post('/new-todo', (req, res)=>{
@@ -48,6 +52,16 @@ router.post('/check/:_id', async (req, res)=>{
         });
     }
     res.redirect('/completed');
+});
+
+router.get('/clear-completed', async (req, res)=>{
+    Todo.deleteMany({completed : true})
+    .then(()=>{
+        res.redirect("/completed");
+    })
+    .catch((err)=>{
+        console.log(err);
+    });
 });
 
 module.exports = router;

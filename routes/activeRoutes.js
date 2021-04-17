@@ -9,7 +9,10 @@ const activeController = require('../controllers/activeController');
 router.get('/', async(req, res)=>{
     const url = '/active';
     const activeTodo = await Todo.find({completed: false});
-    res.render('index', {todo: activeTodo, url: url });
+    var count = activeTodo.length;
+    const allTodo = await Todo.find();
+    all = allTodo.length;
+    res.render('index', {todo: activeTodo, url: url, count: count, all: all});
 });
 
 router.post('/new-todo', (req, res)=>{
@@ -48,6 +51,16 @@ router.post('/check/:_id', async (req, res)=>{
         });
     }
     res.redirect('/active');
+});
+
+router.get('/clear-completed', async (req, res)=>{
+    Todo.deleteMany({completed : true})
+    .then(()=>{
+        res.redirect("/active");
+    })
+    .catch((err)=>{
+        console.log(err);
+    });
 });
 
 module.exports = router;

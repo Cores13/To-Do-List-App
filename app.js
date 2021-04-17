@@ -19,8 +19,6 @@ mongoose.connect(dbURL, {useNewUrlParser: true, useUnifiedTopology: true})
 app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'));
 
-var fullUrl = app.path;
-console.log(fullUrl);
 
 app.use('/',todoRoutes);
 app.use('/active', activeRoutes);
