@@ -11,10 +11,10 @@
             <div class="container">
             <!-- <div class="header"> -->
                 <h1 class="todos-title">todos</h1>
-
+                <div class="bodyy">
                 <div class="textfield">
         
-                    <form action="<%=url%>/new-todo" method="POST" class="input-form">
+                    <form action="<%=url%>/new-todo" method="POST" class="input-form" <% if(all>0){%> style="border-bottom: 1px solid #ededed" <%}%>  >
                         <a href="<%=url%>/toggle-all" id="toggle-a">
                             <img src="arrow.jpg" alt="Toggle all" <%if(all <= 0 ){%> hidden<% }%>>
                         </a>
@@ -24,8 +24,6 @@
         
                 </div>
                 
-                
-            <!-- </div> -->
 
 
             <%if(all > 0 ){%>
@@ -53,7 +51,7 @@
     
             </div>
             <div class="footer">
-                <label><%=count%> items left</label>
+                <label class="items-left"><%=count%> items left</label>
                 <ul class="footer-list">
                     <!-- <div class="filters"> -->
                     <li><a href="/">All</a></li>
@@ -62,9 +60,10 @@
                     <!-- </div> -->
                 </ul>
                 
-                <label <% if(comp <= 0){%> hidden <%}%>><a href="<%=url%>/clear-completed">Clear completed</a></label>
+                <label class="clear-completed" <% if(comp <= 0){%> hidden <%}%>><a href="<%=url%>/clear-completed">Clear completed</a></label>
             </div>
             <% }%>
+        </div>
         </div>
         </div>
         <script src="script.js"></script>
