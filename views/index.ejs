@@ -61,7 +61,8 @@
                     <li><a href="/completed">Completed</a></li>
                     <!-- </div> -->
                 </ul>
-                <label><a href="<%=url%>/clear-completed">Clear completed</a></label>
+                
+                <label <% if(comp <= 0){%> hidden <%}%>><a href="<%=url%>/clear-completed">Clear completed</a></label>
             </div>
             <% }%>
         </div>

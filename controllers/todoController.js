@@ -7,29 +7,31 @@ const active_index = async (req, res)=>{
     const activeTodo = await Todo.find({completed: false});
     var count = activeTodo.length;
     const allTodo = await Todo.find();
-    all = allTodo.length;
-    
-    res.render('index', {todo: activeTodo, url: url, count: count, all: all, edit: edit});
+    var all = allTodo.length;
+    const completedTodo = await Todo.find({completed: true});
+    var comp =completedTodo.length;
+    res.render('index', {todo: activeTodo, url: url, count: count, all: all, edit: edit, comp: comp});
 }
 const home_index = async (req, res)=>{
     const url = '';
     const allTodo = await Todo.find();
     const activeTodo = await Todo.find({completed: false});
     var count = activeTodo.length;
-    all = allTodo.length;
-    // var edit =false;
-    res.render('index', {todo: allTodo, url: url, count: count, all:all, edit: edit});
+    var all = allTodo.length;
+    const completedTodo = await Todo.find({completed: true});
+    var comp =completedTodo.length;
+    res.render('index', {todo: allTodo, url: url, count: count, all:all, edit: edit, comp : comp});
 }
 
 const completed_index = async (req, res)=>{
     const url = '/completed';
     const completedTodo = await Todo.find({completed: true});
     const activeTodo = await Todo.find({completed: false});
-    var count = activeTodo.length;
     const allTodo = await Todo.find();
-    all = allTodo.length;
-    // var edit =false;
-    res.render('index', {todo: completedTodo, url: url, count: count, all: all, edit:edit});
+    var count = activeTodo.length;
+    var all = allTodo.length;
+    var comp =completedTodo.length;
+    res.render('index', {todo: completedTodo, url: url, count: count, all: all, edit:edit, comp: comp});
 }
 
 const todo_create = (req,res) =>{
