@@ -33,14 +33,18 @@
                     <% todo.forEach(todos =>{ %>
                         <li>
                         <div id="div-task">
-                            <form class="one-todo" action="<%=url%>/check/<%=todos._id%>" method="POST">
-                                <input id="c:<%=todos._id%>"class="toggle" name="completed" onChange="this.form.submit()" type="checkbox" <% if(todos.completed == true){%> checked<%}%> data-check-complete>
-                                <label id="<%=todos._id%>" for="c:<%=todos._id%>"class="t-label" <% if(todos.completed == true){%>style="text-decoration: line-through; color: #d9d9d9"<%}%>> <%= todos.todo%> </label>
-                                <a href="<%=url%>/delete-todo/<%=todos._id%>" class="destroy">
+                            <form id ="f:<%=todos._id%>" class="one-todo" action="<%=url%>/check/<%=todos._id%>" method="POST">
+                                <input id="c:<%=todos._id%>"class="toggle" name="completed" onChange="this.form.submit()" type="checkbox" <% if(todos.completed == true){%> checked<%}%>>
+                                <label for="c:<%=todos._id%>" hidden></label>
+                                <% if(edit==false){%>
+                                <label value="<%=todos.todo%>" id="l:<%=todos._id%>" class="t-label" <% if(todos.completed == true){%>style="text-decoration: line-through; color: #d9d9d9"<%}%> ondblclick="changeTodo(this, '<%=url%>')"> <%= todos.todo%> </label>
+                                <a href="<%=url%>/delete-todo/<%=todos._id%>" class="destroy" id="i:<%=todos._id%>" >
                                     <img src="x.png" alt="X">
                                 </a>
+                                <%}%>
                             </form>    
                         </div>
+                        
                     </li>                  
                     <%})%>
                 </ul>
@@ -60,6 +64,6 @@
             <% }%>
         </div>
         </div>
-
+        <script src="script.js"></script>
     </body>
 </html>

@@ -1,9 +1,9 @@
 const express= require('express');
 const Todo = require('../models/todo');
 const router = express.Router();
-const activeController = require('../controllers/activeController');
+// const activeController = require('../controllers/activeController');
 
-
+var edit=false;
 
 // listening for requests
 router.get('/', async(req, res)=>{
@@ -12,7 +12,8 @@ router.get('/', async(req, res)=>{
     var count = activeTodo.length;
     const allTodo = await Todo.find();
     all = allTodo.length;
-    res.render('index', {todo: activeTodo, url: url, count: count, all: all});
+    
+    res.render('index', {todo: activeTodo, url: url, count: count, all: all, edit: edit});
 });
 
 router.post('/new-todo', (req, res)=>{
@@ -63,4 +64,20 @@ router.get('/clear-completed', async (req, res)=>{
     });
 });
 
+router.post('/change-todo/:_id', async (req, res)=>{
+    const todoVal = req.body.todo;
+    const todoCh = await Todo.findById(req.params._id);
+    Todo.updateOne({_id: todoCh._id},{todo: todoVal}, function (err, res){
+        if(err) throw err;
+    });
+    res.redirect("/active");
+    edit=false;
+    // newTodo.save()
+    //     .then((result) =>{
+    //         res.redirect("/completed");
+    //     })
+    //     .catch((err) =>{
+    //         console.log(err);
+    //     });
+});
 module.exports = router;

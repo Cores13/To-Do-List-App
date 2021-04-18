@@ -1,9 +1,9 @@
 const express= require('express');
 const Todo = require('../models/todo');
 const router = express.Router();
-// const activeController = require('../controllers/activeController');
+// const todoController = require('../controllers/activeController');
 
-
+var edit=false;
 
 // listening for requests
 router.get('/', async (req, res)=>{
@@ -12,7 +12,8 @@ router.get('/', async (req, res)=>{
     const activeTodo = await Todo.find({completed: false});
     var count = activeTodo.length;
     all = allTodo.length;
-    res.render('index', {todo: allTodo, url: url, count: count});
+    var edit =false;
+    res.render('index', {todo: allTodo, url: url, count: count, all:all, edit: edit});
 });
 
 router.post('/new-todo', (req, res)=>{
@@ -63,6 +64,15 @@ router.get('/clear-completed', async (req, res)=>{
     });
 });
 
+router.post('/change-todo/:_id', async (req, res)=>{
+    const todoVal = req.body.todo;
+    const todoCh = await Todo.findById(req.params._id);
+    Todo.updateOne({_id: todoCh._id},{todo: todoVal}, function (err, res){
+        if(err) throw err;
+    });
+    res.redirect("/");
+    edit=false;
+});
 // router.get('/active', async(req, res)=>{
 
 //     const activeTodo = await Todo.find({completed: false});
