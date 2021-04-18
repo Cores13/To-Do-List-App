@@ -72,12 +72,16 @@ router.post('/change-todo/:_id', async (req, res)=>{
     });
     res.redirect("/active");
     edit=false;
-    // newTodo.save()
-    //     .then((result) =>{
-    //         res.redirect("/completed");
-    //     })
-    //     .catch((err) =>{
-    //         console.log(err);
-    //     });
+    
 });
+
+router.get('/toggle-all', async (req, res)=>{
+    const allTodo = await Todo.find();
+    console.log(allTodo);
+    Todo.updateMany({completed: false},{completed: true}, function (err, res){
+        if(err) throw err;
+    });
+    res.redirect('/active');
+});
+
 module.exports = router;

@@ -15,7 +15,9 @@
                 <div class="textfield">
         
                     <form action="<%=url%>/new-todo" method="POST" class="input-form">
-                        <img src="arrow.jpg" alt="Toggle all" <%if(all <= 0 ){%> hidden<% }%>>
+                        <a href="<%=url%>/toggle-all" id="toggle-a">
+                            <img src="arrow.jpg" alt="Toggle all" <%if(all <= 0 ){%> hidden<% }%>>
+                        </a>
                         <input type="text" name="todo" class="form-control" placeholder="What needs to be done?" autofocus></input>
                         <input type="submit" value="Add Todo" class="submit-button" hidden>
                     </form>
