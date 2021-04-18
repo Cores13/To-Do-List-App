@@ -25,6 +25,8 @@ html {
   font-weight: 100;
   text-align: center;
   color: rgba(175, 47, 47, 0.15);
+  padding-top: 8;
+  padding-bottom: 8;
   -webkit-text-rendering: optimizeLegibility;
   -moz-text-rendering: optimizeLegibility;
   text-rendering: optimizeLegibility;
@@ -43,21 +45,25 @@ html {
   box-shadow: inset 0 -1px 5px 0 rgb(0 0 0 / 3%);
 }
 .edit {
-  position: relative;
+  /* position: relative; */
   margin: 0;
-  width: 100%;
+  width: 556px;
   font-size: 24px;
   font-family: inherit;
   font-weight: inherit;
   line-height: 1.4em;
   border: 0;
   color: inherit;
-  padding: 6px;
+  padding: 11px;
+  padding-right: 18px;
   border: 1px solid #999;
   box-shadow: inset 0 -1px 5px 0 rgb(0 0 0 / 20%);
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.edit-form {
+  margin-bottom: 0;
 }
 .input-form img {
   margin-top: 25;
@@ -106,33 +112,60 @@ html {
 } */
 .one-todo {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   flex-direction: row;
-  justify-content: space-between;
-  padding: 16;
+  font-family: Arial, Helvetica, sans-serif;
+  font: Arial;
+  font-style: normal;
+  /* justify-content: space-between; */
+  padding: 13;
   padding-right: 23;
   padding-left: 6px;
   margin: 0;
   margin-right: 0;
-  /* align-items: center; */
   width: 95%;
   font-size: 24px;
-  font-style: italic;
   font-weight: inherit;
-  line-height: 1.4em;
+  /* line-height: 1.4em; */
   background: transparent;
-  border: none;
   outline: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: white;
   border-bottom: 1px solid #ededed;
-  /* border-left: 1px solid #ededed;
-  border-right: 1px solid #ededed; */
+}
+.one-todo label {
+  color: #4b4b4b;
 }
 .one-todo a {
-  padding-top: 6px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  font: inherit;
+  font-style: normal;
+  padding-top: 1px;
+  color: darkred;
+  text-decoration: none;
+  opacity: 40%;
 }
+.one-todo a:hover {
+  color: darkred;
+  opacity: 70%;
+}
+
+/* a:link, a:visited {
+  background-color: white;
+  color: black;
+  border: 2px solid green;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: green;
+  color: white;
+} */
 
 .checkLab {
   padding-right: 6px;
