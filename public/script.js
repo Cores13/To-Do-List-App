@@ -12,7 +12,7 @@ function enter1() {
         textArea.dispatchEvent(keyboardEvent);
     }
 
-
+// const bt_sub = document.getElementById('edit-bt');
 
 function changeTodo(req, url){
     //get id of a task
@@ -39,7 +39,7 @@ function changeTodo(req, url){
     edit.setAttribute('type', 'text');
     edit.setAttribute('name', 'todo');
     edit.setAttribute('value',txt);
-    
+    edit.autofocus = true;
     //create submit button and give it attributes
     var bt = document.createElement('button');
     bt.setAttribute('type', 'submit');
@@ -47,9 +47,10 @@ function changeTodo(req, url){
     bt.hidden=true;
     //append edit to form ellement
     form.appendChild(edit);
+    // document.getElementById(`l:${fullId}`).setAttribute('ondblclick', 'a');
     document.getElementById(`f:${fullId}`).appendChild(form);
     document.getElementById(`f:${fullId}`).setAttribute('style', 'padding-top: 0; padding-bottom: 0;');
-    edit.autofocus;
+    
     //event listener
     edit.addEventListener("blur", function() {
         var keyboardEvent = new KeyboardEvent('keydown', {
@@ -60,8 +61,7 @@ function changeTodo(req, url){
             view: window
         });
 
-        var elem = document.getElementById('edit-bt');
-        elem.dispatchEvent('click');
+        bt_sub.click();
         // elem.click();
         console.log('enter pressed')
       });

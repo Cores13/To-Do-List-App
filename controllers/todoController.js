@@ -1,5 +1,7 @@
 const Todo = require('../models/todo');
 var edit=false;
+var id;
+var selected;
 
 
 const active_index = async (req, res)=>{
@@ -10,7 +12,9 @@ const active_index = async (req, res)=>{
     var all = allTodo.length;
     const completedTodo = await Todo.find({completed: true});
     var comp =completedTodo.length;
-    res.render('index', {todo: activeTodo, url: url, count: count, all: all, edit: edit, comp: comp});
+    edit=false;
+    selected='active';
+    res.render('index', {todo: activeTodo, url: url, count: count, all: all, edit: edit, comp: comp, id:id, selected: selected});
 }
 const home_index = async (req, res)=>{
     const url = '';
@@ -20,7 +24,9 @@ const home_index = async (req, res)=>{
     var all = allTodo.length;
     const completedTodo = await Todo.find({completed: true});
     var comp =completedTodo.length;
-    res.render('index', {todo: allTodo, url: url, count: count, all:all, edit: edit, comp : comp});
+    edis=false;
+    selected='all';
+    res.render('index', {todo: allTodo, url: url, count: count, all:all, edit: edit, comp : comp, id:id, selected: selected});
 }
 
 const completed_index = async (req, res)=>{
@@ -31,7 +37,9 @@ const completed_index = async (req, res)=>{
     var count = activeTodo.length;
     var all = allTodo.length;
     var comp =completedTodo.length;
-    res.render('index', {todo: completedTodo, url: url, count: count, all: all, edit:edit, comp: comp});
+    edit=false;
+    selected='completed';
+    res.render('index', {todo: completedTodo, url: url, count: count, all: all, edit:edit, comp: comp, id:id, selected: selected});
 }
 
 const todo_create = (req,res) =>{
@@ -89,8 +97,9 @@ const todo_change = async (req, res)=>{
     Todo.updateOne({_id: todoCh._id},{todo: todoVal}, function (err, res){
         if(err) throw err;
     });
-    res.redirect("back");
+    id = todoCh._id;
     edit=false;
+    res.redirect("back");
 }
 
 //Toggle-all
