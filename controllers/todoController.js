@@ -15,7 +15,7 @@ const active_index = async (req, res)=>{
     var comp =completedTodo.length;
     edit=false;
     selected='active';
-    res.render('index', {todo: activeTodo, url: url, count: count, all: all, edit: edit, comp: comp, id:ide, selected: selected});
+    res.render('index', {todo: activeTodo, url: url, count: count, all: all, edit: edit, comp: comp, ide:ide, selected: selected});
 }
 const home_index = async (req, res)=>{
     url = '';
@@ -25,9 +25,9 @@ const home_index = async (req, res)=>{
     var all = allTodo.length;
     const completedTodo = await Todo.find({completed: true});
     var comp =completedTodo.length;
-    edis=false;
+    edit=false;
     selected='all';
-    res.render('index', {todo: allTodo, url: url, count: count, all:all, edit: edit, comp : comp, id:ide, selected: selected});
+    res.render('index', {todo: allTodo, url: url, count: count, all:all, edit: edit, comp : comp, ide:ide, selected: selected});
 }
 
 const completed_index = async (req, res)=>{
@@ -54,7 +54,8 @@ const editing_completed = async(req, res)=>{
     var count = activeTodo.length;
     var all = allTodo.length;
     var comp =completedTodo.length;
-    res.render('editing', {todo: completedTodo, url: url, count: count, all: all, edit:edit, comp: comp, ide:ide, selected: selected});
+    
+    res.render('index', {todo: completedTodo, url: url, count: count, all: all, edit:edit, comp: comp, ide:ide, selected: selected});
 }
 const editing_active = async(req, res)=>{
     const todoCh = await Todo.findById(req.params._id);
@@ -67,8 +68,9 @@ const editing_active = async(req, res)=>{
     const completedTodo = await Todo.find({completed: true});
     var comp =completedTodo.length;
     edit=true;
-    selected='active';
-    res.render('editing', {todo: activeTodo, url: url, count: count, all: all, edit: edit, comp: comp, ide:ide, selected: selected});
+    selected='editing';
+
+    res.render('index', {todo: activeTodo, url: url, count: count, all: all, edit: edit, comp: comp, ide:ide, selected: selected});
 }
 const editing = async(req, res)=>{
     const todoCh = await Todo.findById(req.params._id);
@@ -80,11 +82,13 @@ const editing = async(req, res)=>{
     var all = allTodo.length;
     const completedTodo = await Todo.find({completed: true});
     var comp =completedTodo.length;
-    edis=true;
+    edit=true;
     selected='all';
-    res.render('editing', {todo: allTodo, url: url, count: count, all:all, edit: edit, comp : comp, ide:ide, selected: selected});
+    
+    res.render('index', {todo: allTodo, url: url, count: count, all:all, edit: edit, comp : comp, ide:ide, selected: selected});
 }
 const todo_create = (req,res) =>{
+    edit=false;
     const {todo} = req.body;
     const newTodo = new Todo({todo})
     newTodo.save()
@@ -97,6 +101,7 @@ const todo_create = (req,res) =>{
 }
 
 const todo_delete = (req, res)=>{
+    edit=false;
     const {_id} = req.params;
     Todo.deleteOne({_id})
     .then(()=>{
@@ -119,10 +124,12 @@ const todo_check = async(req, res)=>{
             if(err) throw err;
         });
     }
+    edit=false;
     res.redirect('back');
 }
 
 const todo_clear_completed = (req, res)=>{
+    edit=false;
     Todo.deleteMany({completed : true})
     .then(()=>{
         res.redirect("back");
@@ -135,18 +142,28 @@ const todo_clear_completed = (req, res)=>{
 //Change todo
 const todo_change = async (req, res)=>{
     const todoVal = req.body.todo;
-    console.log("value: "+todoVal);
     const todoCh = await Todo.findById(req.params._id);
+    edit=false;
     Todo.updateOne({_id: todoCh._id},{todo: todoVal}, function (err, res){
         if(err) throw err;
     });
-    ide = todoCh._id;
-    edit=false;
-    res.redirect('back');
+    switch(url){
+        case '':
+            res.redirect('/');
+            break;
+        case '/active':
+            res.redirect('/active');
+            break;
+        case '/completed':
+            res.redirect('/completed');
+            break;
+    }
+    // res.redirect('back');
 }
 
 //Toggle-all
 const todo_toggle_all = async (req, res) =>{
+    edit=false;
     const allTodo = await Todo.find();
     Todo.updateMany({completed: false},{completed: true}, function (err, res){
         if(err) throw err;
