@@ -1,8 +1,22 @@
 
+var textArea = document.getElementById('edit-bt');
+function enter1() {
+        var keyboardEvent = new KeyboardEvent('keydown', {
+            code: 'Enter',
+            key: 'Enter',
+            charKode: 13,
+            keyCode: 13,
+            view: window
+        });
+    
+        textArea.dispatchEvent(keyboardEvent);
+    }
+
+
+
 function changeTodo(req, url){
     //get id of a task
     var txt = req.textContent;
-    console.log(txt);
     var fullId =  req.id;
     fullId = fullId.substring(fullId.indexOf(":")+1);
     //remove label and other elements
@@ -10,6 +24,8 @@ function changeTodo(req, url){
     lab.remove();
     var i = document.getElementById(`i:${fullId}`);
     i.remove();
+    var c = document.getElementById(`c:${fullId}`);
+    c.remove();
     //make form element and give it attributes
     var form = document.createElement('form');
     form.setAttribute('id', `${fullId}`);
@@ -23,6 +39,7 @@ function changeTodo(req, url){
     edit.setAttribute('type', 'text');
     edit.setAttribute('name', 'todo');
     edit.setAttribute('value',txt);
+    
     //create submit button and give it attributes
     var bt = document.createElement('button');
     bt.setAttribute('type', 'submit');
@@ -31,5 +48,21 @@ function changeTodo(req, url){
     //append edit to form ellement
     form.appendChild(edit);
     document.getElementById(`f:${fullId}`).appendChild(form);
-    document.getElementById(`f:${fullId}`).setAttribute('style', 'padding-top: 0; padding-bottom: 0;')
+    document.getElementById(`f:${fullId}`).setAttribute('style', 'padding-top: 0; padding-bottom: 0;');
+    edit.autofocus;
+    //event listener
+    edit.addEventListener("blur", function() {
+        var keyboardEvent = new KeyboardEvent('keydown', {
+            code: 'Enter',
+            key: 'Enter',
+            charKode: 13,
+            keyCode: 13,
+            view: window
+        });
+
+        var elem = document.getElementById('edit-bt');
+        elem.dispatchEvent('click');
+        // elem.click();
+        console.log('enter pressed')
+      });
 }

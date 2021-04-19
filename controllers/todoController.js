@@ -82,6 +82,7 @@ const todo_clear_completed = (req, res)=>{
     });
 }
 
+//Change todo
 const todo_change = async (req, res)=>{
     const todoVal = req.body.todo;
     const todoCh = await Todo.findById(req.params._id);
@@ -91,14 +92,16 @@ const todo_change = async (req, res)=>{
     res.redirect("back");
     edit=false;
 }
+
+//Toggle-all
 const todo_toggle_all = async (req, res) =>{
     const allTodo = await Todo.find();
-    console.log(allTodo);
     Todo.updateMany({completed: false},{completed: true}, function (err, res){
         if(err) throw err;
     });
     res.redirect('back');
 }
+
 module.exports = {
     completed_index,
     home_index,
