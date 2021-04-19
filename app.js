@@ -1,9 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Todo = require('./models/todo.js');
+// const Todo = require('./models/todo.js');
 const todoRoutes =require('./routes/todoRoutes.js');
 const activeRoutes =require('./routes/activeRoutes.js');
 const completedRoutes =require('./routes/completedRoutes.js');
+path = require('path');
 
 //express app
 const app = express();
@@ -17,8 +18,9 @@ mongoose.connect(dbURL, {useNewUrlParser: true, useUnifiedTopology: true})
 
 
 app.use(express.urlencoded({extended:true}));
-app.use(express.static('public'));
-
+// app.use(express.static('public'));
+// app.use(stylus.middleware({src: __dirname + '/public', compile: compile}));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/',todoRoutes);
 app.use('/active', activeRoutes);

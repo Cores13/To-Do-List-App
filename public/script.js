@@ -47,6 +47,7 @@ function changeTodo(req, url){
     bt.hidden=true;
     //append edit to form ellement
     form.appendChild(edit);
+    form.appendChild(bt);
     // document.getElementById(`l:${fullId}`).setAttribute('ondblclick', 'a');
     document.getElementById(`f:${fullId}`).appendChild(form);
     document.getElementById(`f:${fullId}`).setAttribute('style', 'padding-top: 0; padding-bottom: 0;');
@@ -65,4 +66,10 @@ function changeTodo(req, url){
         // elem.click();
         console.log('enter pressed')
       });
+}
+
+function goTo(req, url){
+    var fullId =  req.id;
+    fullId = fullId.substring(fullId.indexOf(":")+1);
+    location.href = `http://localhost:3000${url}/editing/${fullId}`
 }

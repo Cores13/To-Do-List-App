@@ -1,11 +1,12 @@
 const Todo = require('../models/todo');
-var edit=false;
-var id;
-var selected;
 
+var edit=false;
+var ide;
+var selected;
+var url;
 
 const active_index = async (req, res)=>{
-    const url = '/active';
+    url = '/active';
     const activeTodo = await Todo.find({completed: false});
     var count = activeTodo.length;
     const allTodo = await Todo.find();
@@ -14,10 +15,10 @@ const active_index = async (req, res)=>{
     var comp =completedTodo.length;
     edit=false;
     selected='active';
-    res.render('index', {todo: activeTodo, url: url, count: count, all: all, edit: edit, comp: comp, id:id, selected: selected});
+    res.render('index', {todo: activeTodo, url: url, count: count, all: all, edit: edit, comp: comp, id:ide, selected: selected});
 }
 const home_index = async (req, res)=>{
-    const url = '';
+    url = '';
     const allTodo = await Todo.find();
     const activeTodo = await Todo.find({completed: false});
     var count = activeTodo.length;
@@ -26,11 +27,11 @@ const home_index = async (req, res)=>{
     var comp =completedTodo.length;
     edis=false;
     selected='all';
-    res.render('index', {todo: allTodo, url: url, count: count, all:all, edit: edit, comp : comp, id:id, selected: selected});
+    res.render('index', {todo: allTodo, url: url, count: count, all:all, edit: edit, comp : comp, id:ide, selected: selected});
 }
 
 const completed_index = async (req, res)=>{
-    const url = '/completed';
+    url = '/completed';
     const completedTodo = await Todo.find({completed: true});
     const activeTodo = await Todo.find({completed: false});
     const allTodo = await Todo.find();
@@ -39,9 +40,50 @@ const completed_index = async (req, res)=>{
     var comp =completedTodo.length;
     edit=false;
     selected='completed';
-    res.render('index', {todo: completedTodo, url: url, count: count, all: all, edit:edit, comp: comp, id:id, selected: selected});
+    res.render('index', {todo: completedTodo, url: url, count: count, all: all, edit:edit, comp: comp, ide:ide, selected: selected});
 }
 
+const editing_completed = async(req, res)=>{
+    const todoCh = await Todo.findById(req.params._id);
+    ide = todoCh._id;
+    edit=true;
+    url='/completed';
+    const completedTodo = await Todo.find({completed: true});
+    const activeTodo = await Todo.find({completed: false});
+    const allTodo = await Todo.find();
+    var count = activeTodo.length;
+    var all = allTodo.length;
+    var comp =completedTodo.length;
+    res.render('editing', {todo: completedTodo, url: url, count: count, all: all, edit:edit, comp: comp, ide:ide, selected: selected});
+}
+const editing_active = async(req, res)=>{
+    const todoCh = await Todo.findById(req.params._id);
+    ide = todoCh._id;
+    url = '/active';
+    const activeTodo = await Todo.find({completed: false});
+    var count = activeTodo.length;
+    const allTodo = await Todo.find();
+    var all = allTodo.length;
+    const completedTodo = await Todo.find({completed: true});
+    var comp =completedTodo.length;
+    edit=true;
+    selected='active';
+    res.render('editing', {todo: activeTodo, url: url, count: count, all: all, edit: edit, comp: comp, ide:ide, selected: selected});
+}
+const editing = async(req, res)=>{
+    const todoCh = await Todo.findById(req.params._id);
+    ide = todoCh._id;
+    url = '';
+    const allTodo = await Todo.find();
+    const activeTodo = await Todo.find({completed: false});
+    var count = activeTodo.length;
+    var all = allTodo.length;
+    const completedTodo = await Todo.find({completed: true});
+    var comp =completedTodo.length;
+    edis=true;
+    selected='all';
+    res.render('editing', {todo: allTodo, url: url, count: count, all:all, edit: edit, comp : comp, ide:ide, selected: selected});
+}
 const todo_create = (req,res) =>{
     const {todo} = req.body;
     const newTodo = new Todo({todo})
@@ -93,13 +135,14 @@ const todo_clear_completed = (req, res)=>{
 //Change todo
 const todo_change = async (req, res)=>{
     const todoVal = req.body.todo;
+    console.log("value: "+todoVal);
     const todoCh = await Todo.findById(req.params._id);
     Todo.updateOne({_id: todoCh._id},{todo: todoVal}, function (err, res){
         if(err) throw err;
     });
-    id = todoCh._id;
+    ide = todoCh._id;
     edit=false;
-    res.redirect("back");
+    res.redirect('back');
 }
 
 //Toggle-all
@@ -121,4 +164,7 @@ module.exports = {
     todo_clear_completed,
     todo_change,
     todo_toggle_all,
+    editing_completed,
+    editing_active,
+    editing,
 }

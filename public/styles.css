@@ -63,7 +63,7 @@ html {
   color: inherit;
   padding: 11px;
   padding-bottom: 14px;
-  padding-right: 18px;
+  padding-right: 41px;
   padding-left: 18;
   margin-left: 37px;
   border: 1px solid #999;
@@ -73,10 +73,15 @@ html {
   outline: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: Arial, Helvetica, sans-serif;
+  font: Arial;
+  font-style: normal;
 }
 
 .edit-form {
   margin-bottom: 0;
+  background-color: white;
+  border-bottom: 1px solid #ededed;
 }
 
 .form-control {

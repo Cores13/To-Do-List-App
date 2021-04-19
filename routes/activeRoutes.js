@@ -4,6 +4,7 @@ const todoController = require('../controllers/todoController');
 
 var edit=false;
 router.get('/',todoController.active_index);
+router.get('/editing/:_id',todoController.editing_active);
 router.post('/new-todo', todoController.todo_create);
 router.get('/delete-todo/:_id',todoController.todo_delete);
 router.post('/check/:_id', todoController.todo_check);
