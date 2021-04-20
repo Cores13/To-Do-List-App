@@ -1,4 +1,5 @@
 
+//if clicked outside of edit input box the input is submited
 document.addEventListener('click', (event)=>{
     if(event.target.closest('.edit')) return
 
