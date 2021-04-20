@@ -2,7 +2,7 @@ const express= require('express');
 const router = express.Router();
 const todoController = require('../controllers/todoController');
 
-var edit=false;
+//Routes
 router.get('/',todoController.active_index);
 router.get('/editing/:_id',todoController.editing_active);
 router.post('/new-todo', todoController.todo_create);
