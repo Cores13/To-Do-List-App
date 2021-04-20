@@ -1,4 +1,10 @@
 
+document.addEventListener('click', (event)=>{
+    if(event.target.closest('.edit')) return
+
+    document.getElementById('edit-bt').click();
+});
+
 function goTo(req, url){
     var fullId =  req.id;
     fullId = fullId.substring(fullId.indexOf(":")+1);
