@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// const { stringify } = require('qs');
 
 const todoSchema = new mongoose.Schema({
     todo: {
@@ -11,7 +10,5 @@ const todoSchema = new mongoose.Schema({
         default: false,
     },
 });
-
-// const Todo = mongoose.model("Todo", todoSchema);
 
 module.exports = new mongoose.model("Todo", todoSchema);
