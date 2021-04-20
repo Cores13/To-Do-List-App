@@ -54,6 +54,7 @@ const editing_completed = async(req, res)=>{
     var count = activeTodo.length;
     var all = allTodo.length;
     var comp =completedTodo.length;
+    selected = 'completed';
     
     res.render('index', {todo: completedTodo, url: url, count: count, all: all, edit:edit, comp: comp, ide:ide, selected: selected});
 }
@@ -68,7 +69,7 @@ const editing_active = async(req, res)=>{
     const completedTodo = await Todo.find({completed: true});
     var comp =completedTodo.length;
     edit=true;
-    selected='editing';
+    selected='active';
 
     res.render('index', {todo: activeTodo, url: url, count: count, all: all, edit: edit, comp: comp, ide:ide, selected: selected});
 }
