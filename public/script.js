@@ -5,6 +5,19 @@ document.addEventListener('click', (event)=>{
     document.getElementById('edit-bt').click();
 });
 
+// FINISH THIS!!!!!!!!!!!!!!!!!!
+const completeTask = document.querySelector('input.toggle');
+completeTask.addEventListener('click', (e) => {
+    const endpoint = `/check/${completeTask.dataset.doc}`;
+
+    fetch(endpoint, {
+        method: 'PUT',
+    })
+    .then((response) => response.json())
+    .then((data)=> window.location.href = data.redirect)
+    .catch(err => console.log(err))
+});
+
 const deleteTask = document.querySelector('a.destroy');
 deleteTask.addEventListener('click', (e) => {
     const endpoint = `/delete/${deleteTask.dataset.doc}`;

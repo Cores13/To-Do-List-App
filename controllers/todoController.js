@@ -156,7 +156,7 @@ const todo_check = async(req, res)=>{
         });
     }
     edit=false;
-    res.redirect('back');
+    res.redirect(url);
 }
 
 //Delete completed tasks
