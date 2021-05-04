@@ -6,7 +6,7 @@ const todoController = require('../controllers/todoController');
 router.get('/',todoController.home_index);
 router.get('/editing/:_id',todoController.editing);
 router.post('/new-todo', todoController.todo_create);
-router.get('/delete-todo/:_id',todoController.todo_delete);
+router.delete('/delete/:_id',todoController.todo_delete);
 router.post('/check/:_id', todoController.todo_check);
 router.get('/clear-completed',todoController.todo_clear_completed);
 router.post('/change-todo/:_id', todoController.todo_change);

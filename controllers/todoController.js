@@ -134,7 +134,7 @@ const todo_delete = (req, res)=>{
     //delete task with that id
     Todo.deleteOne({_id})
     .then(()=>{
-        res.redirect("back");
+        res.json({redirect: url});
     })
     .catch((err)=>{
         console.log(err);

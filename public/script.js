@@ -1,9 +1,20 @@
-
 //if clicked outside of edit input box the input is submited
 document.addEventListener('click', (event)=>{
     if(event.target.closest('.edit')) return
 
     document.getElementById('edit-bt').click();
+});
+
+const deleteTask = document.querySelector('a.destroy');
+deleteTask.addEventListener('click', (e) => {
+    const endpoint = `/delete/${deleteTask.dataset.doc}`;
+
+    fetch(endpoint, {
+        method: 'DELETE',
+    })
+    .then((response) => response.json())
+    .then((data)=> window.location.href = data.redirect)
+    .catch(err => console.log(err))
 });
 
 function goTo(req, url){

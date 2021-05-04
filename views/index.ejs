@@ -44,7 +44,7 @@
                                             <input id="c:<%=todos._id%>"class="toggle" name="completed" onChange="this.form.submit()" type="checkbox" <% if(todos.completed == true){%> checked<%}%>>
                                             <label for="c:<%=todos._id%>" class="checkLab" hidden></label>
                                             <label value="<%=todos.todo%>" id="l:<%=todos._id%>" class="t-label" <% if(todos.completed == true){%>style="text-decoration: line-through; color: #d9d9d9"<%}%> ondblclick="goTo(this, '<%=url%>')"> <%= todos.todo%> </label>
-                                            <a href="<%=url%>/delete-todo/<%=todos._id%>" class="destroy" id="i:<%=todos._id%>" >×</a>
+                                            <a data-doc="<%=todos._id%>" class="destroy" id="i:<%=todos._id%>" >×</a>
                                         </form>
                                 <%}%> 
                                 <%} else if(edit==false) {%>
@@ -52,7 +52,7 @@
                                         <input id="c:<%=todos._id%>"class="toggle" name="completed" onChange="this.form.submit()" type="checkbox" <% if(todos.completed == true){%> checked<%}%>>
                                         <label for="c:<%=todos._id%>" class="checkLab" hidden></label>
                                         <label value="<%=todos.todo%>" id="l:<%=todos._id%>" class="t-label" <% if(todos.completed == true){%>style="text-decoration: line-through; color: #d9d9d9"<%}%> ondblclick="goTo(this, '<%=url%>')"> <%= todos.todo%> </label>
-                                        <a href="<%=url%>/delete-todo/<%=todos._id%>" class="destroy" id="i:<%=todos._id%>" >×</a>
+                                        <a data-doc="<%=todos._id%>" class="destroy" id="i:<%=todos._id%>" >×</a>
                                     </form>
                                 <%}%>
                         </div>
