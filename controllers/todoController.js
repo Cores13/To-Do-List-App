@@ -3,7 +3,7 @@ const Todo = require('../models/todo');
 var edit=false;
 var ide;
 var selected;
-var url;
+var url='';
 
 //Home page
 const home_index = async (req, res)=>{
@@ -145,18 +145,11 @@ const todo_delete = (req, res)=>{
 const todo_check = async(req, res)=>{
     //find one that was checked on unchecked
     const todo = await Todo.findById(req.params._id);
-    //if checkbox is checked change completed to true, if not change completed to false
-    if(req.body.completed == 'on'){
-        Todo.updateOne({_id: todo._id},{completed: true}, function (err, res){
-            if(err) throw err;
-        });
-    }else{
-        Todo.updateOne({_id: todo._id},{completed: false}, function (err, res){
-            if(err) throw err;
-        });
-    }
+    Todo.updateOne({_id: todo._id},{completed: !todo.completed}, function (err, res){
+        if(err) throw err;
+    });
     edit=false;
-    res.redirect(url);
+    res.json({redirect: url});
 }
 
 //Delete completed tasks

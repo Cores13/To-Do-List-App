@@ -6,17 +6,17 @@ document.addEventListener('click', (event)=>{
 });
 
 // FINISH THIS!!!!!!!!!!!!!!!!!!
-const completeTask = document.querySelector('input.toggle');
-completeTask.addEventListener('click', (e) => {
+function completeTask (){
+    const completeTask = document.querySelector('input.toggle');
     const endpoint = `/check/${completeTask.dataset.doc}`;
-
+    
     fetch(endpoint, {
         method: 'PUT',
     })
     .then((response) => response.json())
     .then((data)=> window.location.href = data.redirect)
     .catch(err => console.log(err))
-});
+}
 
 const deleteTask = document.querySelector('a.destroy');
 deleteTask.addEventListener('click', (e) => {
