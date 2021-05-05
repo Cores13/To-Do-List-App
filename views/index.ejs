@@ -34,13 +34,13 @@
                         <div id="div-task">
                             <% if(edit==true){%>
                                 <%if(ide==todos._id.toString()){%>
-                                    <form action="<%=url%>/change-todo/<%=todos._id%>" id='f:<%=todos.id_%>' method='POST' class='edit-form'>
-                                        <input type="text" name="todo" id="edit" class='edit' value="<%=todos.todo%>" autofocus>
-                                        <input class="submit-button" type='submit' id='edit-bt' hidden>
+                                    <form action='<%=url%>/change/<%=todos._id%>' method="POST" id='f:<%=todos.id_%>'  class='edit-form'>
+                                        <input onblur="changeTask(this, '<%=todos._id%>')" type="text" name="todo" id="edit" class='edit' value="<%=todos.todo%>" autofocus>
+                                        <!-- <input type='submit' class="edit-bt" id='edit-bt' hidden> -->
                                     </form>
 
                                     <%}else if(todos._id!=ide){%>
-                                        <form id ="f:<%=todos._id%>" class="one-todo" action="<%=url%>/check/<%=todos._id%>" method="POST" <% if(edit ==false){%> style="padding-top: 0; padding-right: 23; padding-left: 6px;" <% }%>>
+                                        <form id="f:<%=todos._id%>" class="one-todo" method="POST" <% if(edit ==false){%> style="padding-top: 0; padding-right: 23; padding-left: 6px;" <% }%>>
                                             <input data-check="<%=todos._id%>" id="<%=todos._id%>" class="<%=todos._id%>" name="completed" onChange="completeTask(this)" type="checkbox" <% if(todos.completed == true){%> checked<%}%>>
                                             <label for="<%=todos._id%>" class="checkLab" hidden></label>
                                             <label value="<%=todos.todo%>" id="l:<%=todos._id%>" class="t-label" <% if(todos.completed == true){%>style="text-decoration: line-through; color: #d9d9d9"<%}%> ondblclick="goTo(this, '<%=url%>')"> <%= todos.todo%> </label>
@@ -48,7 +48,7 @@
                                         </form>
                                 <%}%> 
                                 <%} else if(edit==false) {%>
-                                    <form id ="f:<%=todos._id%>" class="one-todo" action="<%=url%>/check/<%=todos._id%>" method="POST" <% if(edit ==false){%> style="padding-top: 0; padding-right: 23; padding-left: 6px;" <% }%>>
+                                    <form id ="f:<%=todos._id%>" class="one-todo" method="POST" <% if(edit ==false){%> style="padding-top: 0; padding-right: 23; padding-left: 6px;" <% }%>>
                                         <input data-check="<%=todos._id%>" id="<%=todos._id%>" class="<%=todos._id%>" name="completed" onChange="completeTask('<%=todos._id%>')" type="checkbox" <% if(todos.completed == true){%> checked<%}%>>
                                         <label for="<%=todos._id%>" class="checkLab" hidden></label>
                                         <label value="<%=todos.todo%>" id="l:<%=todos._id%>" class="t-label" <% if(todos.completed == true){%>style="text-decoration: line-through; color: #d9d9d9"<%}%> ondblclick="goTo(this, '<%=url%>')"> <%= todos.todo%> </label>

@@ -181,6 +181,7 @@ a {
   display: block;
 }
 .destroy:hover {
+  cursor: pointer;
   display: block;
 }
 

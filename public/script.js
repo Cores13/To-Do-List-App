@@ -1,11 +1,34 @@
 //if clicked outside of edit input box the input is submited
-document.addEventListener('click', (event)=>{
-    if(event.target.closest('.edit')) return
 
-    document.getElementById('edit-bt').click();
+//FIX THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+const editField = document.querySelector('input.edit');
+editField.addEventListener('click', (event)=>{
+    if(event.target.closest('.edit')){
+        return
+    } else{
+        console.log('clicked');
+        document.getElementById('edit-bt').click();
+    }
 });
 
-// FINISH THIS!!!!!!!!!!!!!!!!!!
+function changeTask (req, todoId){
+    const changeTask = document.getElementById(req.id);
+    const todo = changeTask.value;
+    const endpoint = `/change/${todoId}`;
+    const data = {todo, todoId};
+    const options ={
+        method: 'PUT',
+        header: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    fetch(endpoint, options)
+    .then((response) => response.json())
+    // .then((data)=> window.location.href = data.redirect)
+    .catch(err => console.log(err))
+}
+
 function completeTask (taskId){
     const completeTask = document.getElementById(`${taskId}`);
     const endpoint = `/check/${completeTask.dataset.check}`;
@@ -42,7 +65,7 @@ clearCompleted.addEventListener('click', (e) => {
     .catch(err => console.log(err))
 });
 
-    function goTo(req, url){
+function goTo(req, url){
     var fullId =  req.id;
     fullId = fullId.substring(fullId.indexOf(":")+1);
     location.replace(`http://localhost:3000${url}/editing/${fullId}`);

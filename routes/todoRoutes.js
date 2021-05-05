@@ -8,8 +8,8 @@ router.get('/editing/:_id',todoController.editing);
 router.post('/new-todo', todoController.todo_create);
 router.delete('/delete/:_id',todoController.todo_delete);
 router.put('/check/:_id', todoController.todo_check);
-router.delete('/clear-completed',todoController.todo_clear_completed); //DELETE REQ
-router.post('/change-todo/:_id', todoController.todo_change); //PUR REQ /change/:_id
+router.delete('/clear-completed',todoController.todo_clear_completed);
+router.put('/change/:_id', todoController.todo_change); //PUT REQ /change/:_id
 router.get('/toggle-all', todoController.todo_toggle_all); //PUT REQ
 
 module.exports = router;
