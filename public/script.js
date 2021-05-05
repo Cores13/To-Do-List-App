@@ -22,7 +22,7 @@ function changeTask (req, todoId){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
-    }
+    };
     fetch(endpoint, options)
     .then((response) => response.json())
     // .then((data)=> window.location.href = data.redirect)

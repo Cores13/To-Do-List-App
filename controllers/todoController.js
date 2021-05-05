@@ -169,12 +169,11 @@ const todo_clear_completed = (req, res)=>{
 const todo_change = async (req, res)=>{
     //store input value
     const data = req.body;
-    const todoVal = data.body;
-    console.log(data.todo);
-    console.log('data ' + req.body.data);
-    console.log(data.todoId);
-    console.log(todoVal);
-    // console.log(data.todoId);
+    // const todoVal = data.todo;
+    console.log('raw body: ' + req.body)
+    console.log('data: ' +data.todo);
+    console.log('ID: ' + data.todoId);
+
     //get id of a task that needs to be changed
     // const todoCh = await Todo.findById(req.body);
     edit=false;
