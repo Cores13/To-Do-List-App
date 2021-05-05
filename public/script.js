@@ -6,9 +6,9 @@ document.addEventListener('click', (event)=>{
 });
 
 // FINISH THIS!!!!!!!!!!!!!!!!!!
-function completeTask (){
-    const completeTask = document.querySelector('input.toggle');
-    const endpoint = `/check/${completeTask.dataset.doc}`;
+function completeTask (taskId){
+    const completeTask = document.getElementById(`${taskId}`);
+    const endpoint = `/check/${completeTask.dataset.check}`;
     
     fetch(endpoint, {
         method: 'PUT',
@@ -20,7 +20,7 @@ function completeTask (){
 
 const deleteTask = document.querySelector('a.destroy');
 deleteTask.addEventListener('click', (e) => {
-    const endpoint = `/delete/${deleteTask.dataset.doc}`;
+    const endpoint = `/delete/${deleteTask.dataset.delete}`;
 
     fetch(endpoint, {
         method: 'DELETE',
@@ -30,7 +30,19 @@ deleteTask.addEventListener('click', (e) => {
     .catch(err => console.log(err))
 });
 
-function goTo(req, url){
+const clearCompleted = document.querySelector('a.clear');
+clearCompleted.addEventListener('click', (e) => {
+    const endpoint = `/clear-completed/`;
+
+    fetch(endpoint, {
+        method: 'DELETE',
+    })
+    .then((response) => response.json())
+    .then((data)=> window.location.href = data.redirect)
+    .catch(err => console.log(err))
+});
+
+    function goTo(req, url){
     var fullId =  req.id;
     fullId = fullId.substring(fullId.indexOf(":")+1);
     location.replace(`http://localhost:3000${url}/editing/${fullId}`);

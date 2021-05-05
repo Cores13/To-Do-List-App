@@ -143,7 +143,7 @@ const todo_delete = (req, res)=>{
 
 //Checkbox handler
 const todo_check = async(req, res)=>{
-    //find one that was checked on unchecked
+    //find one that was checked or unchecked and change its value to opposite
     const todo = await Todo.findById(req.params._id);
     Todo.updateOne({_id: todo._id},{completed: !todo.completed}, function (err, res){
         if(err) throw err;
@@ -158,7 +158,7 @@ const todo_clear_completed = (req, res)=>{
     //delete all that are true
     Todo.deleteMany({completed : true})
     .then(()=>{
-        res.redirect("back");
+        res.json({redirect: url});
     })
     .catch((err)=>{
         console.log(err);
