@@ -168,42 +168,14 @@ const todo_clear_completed = (req, res)=>{
 //Change task
 const todo_change = async (req, res)=>{
     //store input value
-    var {todo} = req.body;
-    const data = todo;
-    // let helpp = data.todo;
-    const value = data.todo;
-    
-    // const todoVal = data.todo;
-    console.log('body data: ' + todo.todo);
-    console.log('raw body: ' + data);
-    console.log('todo: ' + value);
-    // console.log('raw body: ' + helpp);
-    // console.log('data: ' +value.todo);
-    // console.log('ID: ' + value.todoId);
-
-    //get id of a task that needs to be changed
-    // const todoCh = await Todo.findById(req.body);
-    
-
+    var data = req.params.todo;
+    const id = req.params._id;    
     //change task
-    // Todo.updateOne({_id: todoCh._id},{todo: todoVal}, function (err, res){
-    //     if(err) throw err;
-    // });
-
+    await Todo.updateOne({_id: id},{todo: data}, function (err, res){
+        if(err) throw err;
+    });
     edit=false;
     res.json({redirect: url});
-    //redirect
-    // switch(url){
-    //     case '':
-    //         res.redirect('/');
-    //         break;
-    //     case '/active':
-    //         res.redirect('/active');
-    //         break;
-    //     case '/completed':
-    //         res.redirect('/completed');
-    //         break;
-    // }
 }
 
 //Toggle-all 

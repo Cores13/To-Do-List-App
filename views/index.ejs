@@ -34,8 +34,8 @@
                         <div id="div-task">
                             <% if(edit==true){%>
                                 <%if(ide==todos._id.toString()){%>
-                                    <form action='<%=url%>/change/<%=todos._id%>' method="POST" id='f:<%=todos.id_%>'  class='edit-form'>
-                                        <input onblur="changeTask(this, '<%=todos._id%>')" type="text" name="todo" id="edit" class='edit' value="<%=todos.todo%>" autofocus>
+                                    <form id='f:<%=todos.id_%>'  class='edit-form'>
+                                        <input onkeydown="changeTaskOnEnter(event, this, '<%=todos._id%>')" onblur="changeTask(this, '<%=todos._id%>')" type="text" name="todo" id="edit" class='edit' value="<%=todos.todo%>" autofocus>
                                         <!-- <input type='submit' class="edit-bt" id='edit-bt' hidden> -->
                                     </form>
 

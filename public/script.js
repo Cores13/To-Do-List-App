@@ -1,52 +1,6 @@
 //if clicked outside of edit input box the input is submited
 
 //FIX THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-const editField = document.querySelector('input.edit');
-editField.addEventListener('click', (event)=>{
-    if(event.target.closest('.edit')){
-        return
-    } else{
-        console.log('clicked');
-        document.getElementById('edit-bt').click();
-    }
-});
-
-function changeTask(req, todoId){
-    const changeTask = document.getElementById(req.id);
-    const todo = changeTask.value.toString();
-    const endpoint = `/change/${todoId}`;
-    const ID = todoId.toString();
-    const data = {todo, ID};
-    // const body = ;
-    const jsonData = JSON.stringify(data);
-    const options ={
-        method: 'PUT',
-        header: {
-            'Content-Type': 'application/*+json'
-        },
-        form: jsonData
-    };
-    console.log('todo: ' + todo);
-    console.log('data: ' + data.todo);
-    console.log(jsonData);
-    fetch(endpoint, options)
-    .then((response) => response.json())
-    // .then((data)=> window.location.href = data.redirect)
-    .catch(err => console.log(err))
-}
-
-function completeTask (taskId){
-    const completeTask = document.getElementById(`${taskId}`);
-    const endpoint = `/check/${completeTask.dataset.check}`;
-    
-    fetch(endpoint, {
-        method: 'PUT',
-    })
-    .then((response) => response.json())
-    .then((data)=> window.location.href = data.redirect)
-    .catch(err => console.log(err))
-}
-
 const deleteTask = document.querySelector('a.destroy');
 deleteTask.addEventListener('click', (e) => {
     const endpoint = `/delete/${deleteTask.dataset.delete}`;
@@ -70,6 +24,61 @@ clearCompleted.addEventListener('click', (e) => {
     .then((data)=> window.location.href = data.redirect)
     .catch(err => console.log(err))
 });
+
+const editField = document.querySelector('input.edit');
+if(editField){
+editField.addEventListener('click', (event)=>{
+    if(event.target.closest('.edit')){
+        return
+    } else{
+        console.log('clicked');
+        document.getElementById('edit-bt').click();
+    }
+});
+}
+
+function changeTaskOnEnter(event, req, todoId){
+    if(event.keyCode == 13) {
+        const changeTask = document.getElementById(req.id);
+        const todo = changeTask.value.toString();
+        const endpoint = `/change/${todoId}/${todo}`;
+
+        const options ={
+            method: 'PUT'
+        };
+        fetch(endpoint, options)
+        .then((response) => response.json())
+        .then((data)=> window.location.href = '/' + data.redirect)
+        .catch(err => console.log(err))
+    }else{
+        return
+    }
+}
+function changeTask(req, todoId){
+    const changeTask = document.getElementById(req.id);
+    const todo = changeTask.value.toString();
+    const endpoint = `/change/${todoId}/${todo}`;
+
+    const options ={
+        method: 'PUT'
+    };
+    fetch(endpoint, options)
+    .then((response) => response.json())
+    .then((data)=> window.location.href = '/' + data.redirect)
+    .catch(err => console.log(err))
+}
+
+function completeTask (taskId){
+    const completeTask = document.getElementById(`${taskId}`);
+    const endpoint = `/check/${completeTask.dataset.check}`;
+    
+    fetch(endpoint, {
+        method: 'PUT',
+    })
+    .then((response) => response.json())
+    .then((data)=> window.location.href = data.redirect)
+    .catch(err => console.log(err))
+}
 
 function goTo(req, url){
     var fullId =  req.id;
