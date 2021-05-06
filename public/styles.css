@@ -48,6 +48,9 @@ html {
   width: 15px;
   height: 15px;
 }
+.toggle-a{
+  cursor: pointer;
+}
 .edit {
   margin: 0;
   width: 562px;

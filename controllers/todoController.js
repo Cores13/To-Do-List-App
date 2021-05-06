@@ -181,14 +181,12 @@ const todo_change = async (req, res)=>{
 //Toggle-all 
 const todo_toggle_all = async (req, res) =>{
     edit=false;
-    //store all tasks
-    const allTodo = await Todo.find();
     //change all tasks
     Todo.updateMany({completed: false},{completed: true}, function (err, res){
         if(err) throw err;
     });
     //redirect
-    res.redirect('back');
+    res.json({redirect: url});
 }
 
 module.exports = {

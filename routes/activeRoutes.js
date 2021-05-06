@@ -10,6 +10,6 @@ router.delete('/delete/:_id', todoController.todo_delete);
 router.put('/check/:_id', todoController.todo_check);
 router.delete('/clear-completed', todoController.todo_clear_completed);
 router.put('/change/:_id/:todo', todoController.todo_change);
-router.get('/toggle-all', todoController.todo_toggle_all); //PUT REQ
+router.put('/toggle-all', todoController.todo_toggle_all);
 
 module.exports = router;

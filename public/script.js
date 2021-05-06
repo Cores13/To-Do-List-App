@@ -1,40 +1,54 @@
+const toggleAll = document.querySelector('a.toggle-a');
+if(toggleAll){
+    toggleAll.addEventListener('click', (e) =>{
+        const endpoint = `/toggle-all`;
+        fetch(endpoint, {
+            method: 'PUT',
+        })
+        .then((response) => response.json())
+        .then((data)=> window.location.href = data.redirect)
+        .catch(err => console.log(err))
+    });
+}
 //if clicked outside of edit input box the input is submited
-
-//FIX THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const deleteTask = document.querySelector('a.destroy');
-deleteTask.addEventListener('click', (e) => {
-    const endpoint = `/delete/${deleteTask.dataset.delete}`;
+if(deleteTask){
+    deleteTask.addEventListener('click', (e) => {
+        const endpoint = `/delete/${deleteTask.dataset.delete}`;
 
-    fetch(endpoint, {
-        method: 'DELETE',
-    })
-    .then((response) => response.json())
-    .then((data)=> window.location.href = data.redirect)
-    .catch(err => console.log(err))
-});
+        fetch(endpoint, {
+            method: 'DELETE',
+        })
+        .then((response) => response.json())
+        .then((data)=> window.location.href = data.redirect)
+        .catch(err => console.log(err))
+    });
+}
 
 const clearCompleted = document.querySelector('a.clear');
-clearCompleted.addEventListener('click', (e) => {
-    const endpoint = `/clear-completed/`;
+if(clearCompleted){
+    clearCompleted.addEventListener('click', (e) => {
+        const endpoint = `/clear-completed/`;
 
-    fetch(endpoint, {
-        method: 'DELETE',
-    })
-    .then((response) => response.json())
-    .then((data)=> window.location.href = data.redirect)
-    .catch(err => console.log(err))
-});
+        fetch(endpoint, {
+            method: 'DELETE',
+        })
+        .then((response) => response.json())
+        .then((data)=> window.location.href = data.redirect)
+        .catch(err => console.log(err))
+    });
+}
 
 const editField = document.querySelector('input.edit');
 if(editField){
-editField.addEventListener('click', (event)=>{
-    if(event.target.closest('.edit')){
-        return
-    } else{
-        console.log('clicked');
-        document.getElementById('edit-bt').click();
-    }
-});
+    editField.addEventListener('click', (event)=>{
+        if(event.target.closest('.edit')){
+            return
+        } else{
+            console.log('clicked');
+            document.getElementById('edit-bt').click();
+        }
+    });
 }
 
 function changeTaskOnEnter(event, req, todoId){
