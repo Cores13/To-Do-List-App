@@ -168,22 +168,30 @@ const todo_clear_completed = (req, res)=>{
 //Change task
 const todo_change = async (req, res)=>{
     //store input value
-    const data = req.body;
+    var {todo} = req.body;
+    const data = todo;
+    // let helpp = data.todo;
+    const value = data.todo;
+    
     // const todoVal = data.todo;
-    console.log('raw body: ' + req.body)
-    console.log('data: ' +data.todo);
-    console.log('ID: ' + data.todoId);
+    console.log('body data: ' + todo.todo);
+    console.log('raw body: ' + data);
+    console.log('todo: ' + value);
+    // console.log('raw body: ' + helpp);
+    // console.log('data: ' +value.todo);
+    // console.log('ID: ' + value.todoId);
 
     //get id of a task that needs to be changed
     // const todoCh = await Todo.findById(req.body);
-    edit=false;
-    res.json({redirect: url});
+    
 
     //change task
     // Todo.updateOne({_id: todoCh._id},{todo: todoVal}, function (err, res){
     //     if(err) throw err;
     // });
 
+    edit=false;
+    res.json({redirect: url});
     //redirect
     // switch(url){
     //     case '':

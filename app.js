@@ -4,21 +4,24 @@ const todoRoutes =require('./routes/todoRoutes.js');
 const activeRoutes =require('./routes/activeRoutes.js');
 const completedRoutes =require('./routes/completedRoutes.js');
 path = require('path');
+// const bodyParser = require('body-parser');
 
 //express app
 const app = express();
 app.set('view engine', 'ejs');
 
+app.use(express.urlencoded({extended:true}));
+app.use(express.json({  
+    strict: true,
+    type: 'application/json'
+}));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //Connect to a database and start a listener on port 3000
 const dbURL ='mongodb+srv://user1:123@cluster0.kg6rz.mongodb.net/todo-database?retryWrites=true&w=majority';
 mongoose.connect(dbURL, {useNewUrlParser: true, useUnifiedTopology: true})
     .then((result)=> app.listen(3000))
     .catch((err)=> console.log(err));
-
-
-app.use(express.urlencoded({extended:true}));
-app.use(express.static(path.join(__dirname, 'public')));
 
 //routes
 app.use('/',todoRoutes);

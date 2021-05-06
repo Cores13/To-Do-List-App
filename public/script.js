@@ -11,18 +11,24 @@ editField.addEventListener('click', (event)=>{
     }
 });
 
-function changeTask (req, todoId){
+function changeTask(req, todoId){
     const changeTask = document.getElementById(req.id);
-    const todo = changeTask.value;
+    const todo = changeTask.value.toString();
     const endpoint = `/change/${todoId}`;
-    const data = {todo, todoId};
+    const ID = todoId.toString();
+    const data = {todo, ID};
+    // const body = ;
+    const jsonData = JSON.stringify(data);
     const options ={
         method: 'PUT',
         header: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/*+json'
         },
-        body: JSON.stringify(data)
+        form: jsonData
     };
+    console.log('todo: ' + todo);
+    console.log('data: ' + data.todo);
+    console.log(jsonData);
     fetch(endpoint, options)
     .then((response) => response.json())
     // .then((data)=> window.location.href = data.redirect)
